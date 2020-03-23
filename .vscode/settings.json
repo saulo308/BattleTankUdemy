@@ -1,0 +1,10 @@
+{
+	"files.exclude": {
+		"C:/Users/sauli/OneDrive/Documentos/Unreal Projects/BattleTankUdemy/.git": true,
+		"C:/Users/sauli/OneDrive/Documentos/Unreal Projects/BattleTankUdemy/.vs": true,
+		"C:/Users/sauli/OneDrive/Documentos/Unreal Projects/BattleTankUdemy/.vscode": true,
+		"C:/Users/sauli/OneDrive/Documentos/Unreal Projects/BattleTankUdemy/Content": true,
+		"C:/Users/sauli/OneDrive/Documentos/Unreal Projects/BattleTankUdemy/Intermediate": true,
+		"C:/Users/sauli/OneDrive/Documentos/Unreal Projects/BattleTankUdemy/Saved": true
+	}
+}

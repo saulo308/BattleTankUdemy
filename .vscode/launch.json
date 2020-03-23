@@ -1,0 +1,128 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "BattleTankUdemy (Debug)",
+			"request": "launch",
+			"preLaunchTask": "BattleTankUdemy Win64 Debug Build",
+			"program": "C:\\Users\\sauli\\OneDrive\\Documentos\\Unreal Projects\\BattleTankUdemy\\Binaries\\Win64\\UE4-Win64-Debug.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.24",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.24\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BattleTankUdemy (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "BattleTankUdemy Win64 DebugGame Build",
+			"program": "C:\\Users\\sauli\\OneDrive\\Documentos\\Unreal Projects\\BattleTankUdemy\\Binaries\\Win64\\UE4-Win64-DebugGame.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.24",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.24\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BattleTankUdemy (Development)",
+			"request": "launch",
+			"preLaunchTask": "BattleTankUdemy Win64 Development Build",
+			"program": "C:\\Users\\sauli\\OneDrive\\Documentos\\Unreal Projects\\BattleTankUdemy\\Binaries\\Win64\\UE4.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.24",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.24\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BattleTankUdemy (Shipping)",
+			"request": "launch",
+			"preLaunchTask": "BattleTankUdemy Win64 Shipping Build",
+			"program": "C:\\Users\\sauli\\OneDrive\\Documentos\\Unreal Projects\\BattleTankUdemy\\Binaries\\Win64\\UE4-Win64-Shipping.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.24",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.24\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BattleTankUdemy (Test)",
+			"request": "launch",
+			"preLaunchTask": "BattleTankUdemy Win64 Test Build",
+			"program": "C:\\Users\\sauli\\OneDrive\\Documentos\\Unreal Projects\\BattleTankUdemy\\Binaries\\Win64\\UE4-Win64-Test.exe",
+			"args": [
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.24",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.24\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BattleTankUdemyEditor (Debug)",
+			"request": "launch",
+			"preLaunchTask": "BattleTankUdemyEditor Win64 Debug Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.24\\Engine\\Binaries\\Win64\\UE4Editor-Win64-Debug.exe",
+			"args": [
+				"C:\\Users\\sauli\\OneDrive\\Documentos\\Unreal Projects\\BattleTankUdemy\\BattleTankUdemy.uproject"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.24",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.24\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BattleTankUdemyEditor (DebugGame)",
+			"request": "launch",
+			"preLaunchTask": "BattleTankUdemyEditor Win64 DebugGame Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.24\\Engine\\Binaries\\Win64\\UE4Editor-Win64-DebugGame.exe",
+			"args": [
+				"C:\\Users\\sauli\\OneDrive\\Documentos\\Unreal Projects\\BattleTankUdemy\\BattleTankUdemy.uproject"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.24",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.24\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "BattleTankUdemyEditor (Development)",
+			"request": "launch",
+			"preLaunchTask": "BattleTankUdemyEditor Win64 Development Build",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.24\\Engine\\Binaries\\Win64\\UE4Editor.exe",
+			"args": [
+				"C:\\Users\\sauli\\OneDrive\\Documentos\\Unreal Projects\\BattleTankUdemy\\BattleTankUdemy.uproject"
+			],
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.24",
+			"stopAtEntry": false,
+			"externalConsole": true,
+			"type": "cppvsdbg",
+			"visualizerFile": "C:\\Program Files\\Epic Games\\UE_4.24\\Engine\\Extras\\VisualStudioDebugging\\UE4.natvis"
+		},
+		{
+			"name": "Generate Project Files",
+			"type": "clr",
+			"request": "launch",
+			"program": "C:\\Program Files\\Epic Games\\UE_4.24\\Engine\\Binaries\\DotNET\\UnrealBuildTool.exe",
+			"console": "externalTerminal",
+			"args": [
+				"-projectfiles",
+				"-vscode",
+				"-project=\"C:\\Users\\sauli\\OneDrive\\Documentos\\Unreal Projects\\BattleTankUdemy\\BattleTankUdemy.uproject\"",
+				"-game",
+				"-engine"
+			],
+			"internalConsoleOptions": "openOnSessionStart",
+			"cwd": "C:\\Program Files\\Epic Games\\UE_4.24"
+		}
+	]
+}
