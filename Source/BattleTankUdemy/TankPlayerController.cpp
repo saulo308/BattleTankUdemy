@@ -29,7 +29,7 @@ void ATankPlayerController::AimTowardsCrosshair(){
     //CallingRayCast
     FVector HitLocationResult = FVector(0);
     if(GetSightRayHitLocation(HitLocationResult)){
-        UE_LOG(LogTemp,Warning,TEXT("Hit location is:%s"),*HitLocationResult.ToString());
+        PlayerTank->AimAt(HitLocationResult);
     }
 }
 

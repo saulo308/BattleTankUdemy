@@ -5,13 +5,26 @@
 #include "TankAIController.h"
 
 void ATankAIController::BeginPlay(){
-    ATank* ControlledTank = GetControlledTank();
+    Super::BeginPlay();
+    ControlledTank = GetControlledTank();
     if(!ControlledTank)
         UE_LOG(LogTemp,Error,TEXT("AIController tank not found!!"));
 
-    ATank* PlayerTank = GetPlayerControlledTank();
-    if(!PlayerTank){
+    PlayerTank = GetPlayerControlledTank();
+    if(!PlayerTank)
         UE_LOG(LogTemp,Error,TEXT("Couldn't find the player tank!"));
+}
+
+void ATankAIController::Tick(float DeltaTime){
+    Super::Tick(DeltaTime);
+
+    if(ControlledTank && PlayerTank){
+        //Move towards player
+
+        //Aim at player
+        ControlledTank->AimAt(PlayerTank->GetActorLocation());
+
+        //Fire
     }
 }
 
