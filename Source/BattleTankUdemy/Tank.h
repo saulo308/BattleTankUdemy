@@ -32,5 +32,6 @@ public:
 
 	UFUNCTION()
 	void AimAt(FVector AimLocation);
-
+	UFUNCTION(BlueprintCallable)
+	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 };
