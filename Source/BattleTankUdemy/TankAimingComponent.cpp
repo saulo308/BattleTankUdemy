@@ -34,14 +34,20 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed){
 		StartLocation,
 		HitLocation,
 		LaunchSpeed,
+		false,
+		0,
+		0,
 		ESuggestProjVelocityTraceOption::DoNotTrace
 	);
 	if(bSuggestedDirection){
 		//Normalize
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 
+		UE_LOG(LogTemp,Warning,TEXT("%f found solution"),GetWorld()->GetTimeSeconds());
 		//MoveBarrel
 		MoveBarrel(AimDirection);
+	}else{
+		UE_LOG(LogTemp,Warning,TEXT("%f not found solution"),GetWorld()->GetTimeSeconds());
 	}
 }
 

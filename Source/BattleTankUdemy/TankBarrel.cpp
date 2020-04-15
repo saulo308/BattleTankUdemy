@@ -3,7 +3,6 @@
 
 #include "TankBarrel.h"
 
-void UTankBarrel::ElevateBarrel(float DegreesPerSecond){
-    UE_LOG(LogTemp,Warning,TEXT("Calling elevate"));
-
+void UTankBarrel::ElevateBarrel(float RelativeSpeed){
+   // UE_LOG(LogTemp,Warning,TEXT("Calling elevate"));
 }
