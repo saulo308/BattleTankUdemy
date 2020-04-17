@@ -7,11 +7,10 @@
 ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 
 	//Setting aiming component
 	AimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
-	UE_LOG(LogTemp,Warning,TEXT("Create aiming %s"),*GetOwner()->GetName());
 }
 
 // Called when the game starts or when spawned
@@ -21,6 +20,13 @@ void ATank::BeginPlay()
 	
 }
 
+// Called every frame
+void ATank::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+}
+
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -28,12 +34,10 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 }
 
 void ATank::AimAt(FVector AimLocation){
-	//AimingComponent->AimAt(AimLocation,LaunchSpeed);
+	AimingComponent->AimAt(AimLocation,LaunchSpeed);
 }
 
 void ATank::SetBarrelReference(UTankBarrel* BarrelToSet){
-	if(AimingComponent)
-		UE_LOG(LogTemp,Warning,TEXT("ok"));
-	//AimingComponent->SetBarrelReference(BarrelToSet);
+	AimingComponent->SetBarrelReference(BarrelToSet);
 }
 
