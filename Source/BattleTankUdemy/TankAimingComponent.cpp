@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Kismet/GameplayStatics.h"
-#include "TankBarrel.h"
+
 #include "TankAimingComponent.h"
 
 // Sets default values for this component's properties
@@ -14,44 +13,31 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet){
+void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet){
 	BarrelRef = BarrelToSet;
+	UE_LOG(LogTemp,Warning,TEXT("Barrel:%s"), *BarrelRef->GetName());
 }
 
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed){
-	if(!BarrelRef){
-		UE_LOG(LogTemp,Error,TEXT("Attempt to aim without barrel ref! - TankAimingComponent.cpp"));
-		return;
-	}
 
-	//Calculating launching direction
-	FVector OutLaunchVelocity(0);
-	FVector StartLocation = BarrelRef->GetSocketLocation(FName("ProjectileSocket"));
-	//Getting direction
-	bool bSuggestedDirection = UGameplayStatics::SuggestProjectileVelocity(
-		this,
-		OutLaunchVelocity,
-		StartLocation,
-		HitLocation,
-		LaunchSpeed,
-		ESuggestProjVelocityTraceOption::DoNotTrace
-	);
-	if(bSuggestedDirection){
-		//Normalize
-		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+// Called when the game starts
+void UTankAimingComponent::BeginPlay()
+{
+	Super::BeginPlay();
 
-		//MoveBarrel
-		MoveBarrel(AimDirection);
-	}
+	// ...
+	
 }
 
-void UTankAimingComponent::MoveBarrel(FVector AimDirection){
-	//Difference between aim rotation and barrel rotation
-	auto BarrelRotator = BarrelRef->GetForwardVector().Rotation();
-	auto AimRotator = AimDirection.Rotation();
-	auto DeltaRotation = AimRotator - BarrelRotator;
 
-	//MoveBarrel
-	//BarrelRef->ElevateBarrel(5.f);
+// Called every frame
+void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	// ...
+}
+
+void UTankAimingComponent::AimAt(FVector HitLocation){
+	UE_LOG(LogTemp,Warning,TEXT("%s is aiming at %s from %s"),*GetOwner()->GetName(), *HitLocation.ToString(),*BarrelRef->GetComponentLocation().ToString());
 }
 
