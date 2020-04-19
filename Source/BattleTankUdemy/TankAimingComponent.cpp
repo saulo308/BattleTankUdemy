@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Kismet/GameplayStatics.h"
+#include "TankBarrel.h"
 #include "TankAimingComponent.h"
 
 // Sets default values for this component's properties
@@ -13,28 +14,9 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet){
+void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet){
 	BarrelRef = BarrelToSet;
 	UE_LOG(LogTemp,Warning,TEXT("Barrel:%s"), *BarrelRef->GetName());
-}
-
-
-// Called when the game starts
-void UTankAimingComponent::BeginPlay()
-{
-	Super::BeginPlay();
-
-	// ...
-	
-}
-
-
-// Called every frame
-void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed){
@@ -67,13 +49,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed){
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection){
 	//Calculating delta between current barrel rotation and aim rotation
 	if(!BarrelRef) return;
-	
+
 	auto BarrelRotator = BarrelRef->GetForwardVector().Rotation();
 	auto AimRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimRotator - BarrelRotator;
-	UE_LOG(LogTemp,Warning,TEXT("Delta rotator:%s"),*DeltaRotator.ToString());
 
-	//Elevate Barrel the right amount according to max elevation speed
-
+	//Elevate
+	BarrelRef->Elevate(5);
 }
 
