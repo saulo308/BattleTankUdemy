@@ -25,7 +25,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION()
-	void AimAt(FVector HitLocation);
+	void AimAt(FVector HitLocation,float LaunchSpeed);
 	UFUNCTION()
 	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 
