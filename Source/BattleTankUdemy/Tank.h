@@ -8,12 +8,13 @@
 
 //Forward Declarations
 class UTankBarrel;
+class UTankTurret;
 class UTankAimingComponent;
-
 UCLASS()
 class BATTLETANKUDEMY_API ATank : public APawn
 {
 	GENERATED_BODY()
+
 
 public:
 	// Sets default values for this pawn's properties
@@ -34,6 +35,8 @@ public:
 	void AimAt(FVector AimLocation);
 	UFUNCTION(BlueprintCallable)
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
+	UFUNCTION(BlueprintCallable)
+	void SetTurretReference(UTankTurret* TurretToSet);
 private:
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 100000.f;
