@@ -42,7 +42,6 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed){
 		//Move Barrel
 		MoveBarrelTowards(AimDirection);
 	}
-
 	//UE_LOG(LogTemp,Warning,TEXT("%f: %s is launching at %f"),*GetOwner()->GetName(), LaunchSpeed);
 }
 
