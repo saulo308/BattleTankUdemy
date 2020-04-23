@@ -51,14 +51,16 @@ void ATank::Fire(){
 		return;
 	}
 
-	UE_LOG(LogTemp,Warning,TEXT("Firing"));
-
+	//Spawning
 	auto SpawnLocation = BarrelRef->GetSocketLocation(FName("BarrelMuzzle"));
 	auto SpawnRotation = BarrelRef->GetSocketRotation(FName("BarelMuzzle"));
-	GetWorld()->SpawnActor<AProjectile>(
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 		ProjectileBlueprint,
 		SpawnLocation,
 		SpawnRotation
 	);
+
+	//Launching
+	Projectile->LaunchProjectile(LaunchSpeed);
 }
 
