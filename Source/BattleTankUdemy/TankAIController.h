@@ -22,8 +22,6 @@ public:
 	
 private:
 	UFUNCTION()
-	ATank* GetControlledTank() const;
-	UFUNCTION()
 	ATank* GetPlayerControlledTank() const;
 
 	UPROPERTY()

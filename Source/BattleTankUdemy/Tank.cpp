@@ -46,21 +46,23 @@ void ATank::SetTurretReference(UTankTurret* TurretToSet){
 }
 
 void ATank::Fire(){
-	if(!BarrelRef){
-		UE_LOG(LogTemp,Error,TEXT("Attempt to fire but barrel reference is undefined!!"));
-		return;
+	bool bIsReloaded = (FPlatformTime::Seconds() - LastFireTime) >= ReloadTimeInSeconds;
+
+	if(BarrelRef && bIsReloaded){
+		//Spawning
+		auto SpawnLocation = BarrelRef->GetSocketLocation(FName("BarrelMuzzle"));
+		auto SpawnRotation = BarrelRef->GetSocketRotation(FName("BarelMuzzle"));
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+			ProjectileBlueprint,
+			SpawnLocation,
+			SpawnRotation
+		);
+
+		//Launching
+		Projectile->LaunchProjectile(LaunchSpeed);
+
+		//Reset fire time
+		LastFireTime = FPlatformTime::Seconds();
 	}
-
-	//Spawning
-	auto SpawnLocation = BarrelRef->GetSocketLocation(FName("BarrelMuzzle"));
-	auto SpawnRotation = BarrelRef->GetSocketRotation(FName("BarelMuzzle"));
-	auto Projectile = GetWorld()->SpawnActor<AProjectile>(
-		ProjectileBlueprint,
-		SpawnLocation,
-		SpawnRotation
-	);
-
-	//Launching
-	Projectile->LaunchProjectile(LaunchSpeed);
 }
 

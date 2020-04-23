@@ -51,4 +51,10 @@ private:
 
 	UPROPERTY()
 	UTankBarrel* BarrelRef = nullptr;
+
+	//Fire properties
+	UPROPERTY()
+	float ReloadTimeInSeconds = 3.f;
+	UPROPERTY()
+	double LastFireTime = 0;
 };
