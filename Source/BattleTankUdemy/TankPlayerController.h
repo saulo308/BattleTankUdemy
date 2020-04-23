@@ -34,10 +34,10 @@ private:
 
 	UPROPERTY()
 	ATank* PlayerTank = nullptr;
-	UPROPERTY(Editanywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrosshairXLocation = 0.5f;
-	UPROPERTY(Editanywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrosshairYLocation = 0.33333f;
-	UPROPERTY(Editanywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000.f;
 };
