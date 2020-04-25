@@ -9,6 +9,7 @@
 //Forward Declarations
 class UTankBarrel;
 class UTankTurret;
+class UTankTrack;
 class UTankAimingComponent;
 class AProjectile;
 
@@ -38,7 +39,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Fire();
 	UFUNCTION(BlueprintCallable)
-	void SetTankReferences(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet);
+	void SetTankReferences(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet,UTankTrack* LeftTrack, UTankTrack* RightTrack);
 
 public:
 	//Static meshes to set
@@ -46,6 +47,8 @@ public:
 	UStaticMesh* BarrelMesh;
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	UStaticMesh* TurretMesh;
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UStaticMesh* TrackMesh;
 
 private:
 	//Fire properties
