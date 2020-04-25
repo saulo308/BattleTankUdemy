@@ -36,11 +36,16 @@ public:
 	UFUNCTION()
 	void AimAt(FVector AimLocation);
 	UFUNCTION(BlueprintCallable)
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-	UFUNCTION(BlueprintCallable)
-	void SetTurretReference(UTankTurret* TurretToSet);
-	UFUNCTION(BlueprintCallable)
 	void Fire();
+	UFUNCTION(BlueprintCallable)
+	void SetTankReferences(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet);
+
+public:
+	//Static meshes to set
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UStaticMesh* BarrelMesh;
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UStaticMesh* TurretMesh;
 
 private:
 	//Fire properties
@@ -54,6 +59,7 @@ private:
 	UPROPERTY(EditDefaultsOnly,Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
+	//Barrel
 	UPROPERTY()
 	UTankBarrel* BarrelRef = nullptr;
 };

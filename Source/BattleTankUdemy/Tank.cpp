@@ -4,6 +4,7 @@
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
+#include "TankTurret.h"
 
 // Sets default values
 ATank::ATank()
@@ -36,13 +37,17 @@ void ATank::AimAt(FVector AimLocation){
 	AimingComponent->AimAt(AimLocation,LaunchSpeed);
 }
 
-void ATank::SetBarrelReference(UTankBarrel* BarrelToSet){
+void ATank::SetTankReferences(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet){
+	//Barrel
 	AimingComponent->SetBarrelReference(BarrelToSet);
 	BarrelRef = BarrelToSet;
-}
+	if(BarrelMesh)
+		BarrelRef->SetStaticMesh(BarrelMesh);
 
-void ATank::SetTurretReference(UTankTurret* TurretToSet){
+	//Turret
 	AimingComponent->SetTurretReference(TurretToSet);
+	if(TurretMesh)
+		TurretToSet->SetStaticMesh(TurretMesh);
 }
 
 void ATank::Fire(){
