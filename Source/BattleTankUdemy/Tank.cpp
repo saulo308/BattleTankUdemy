@@ -16,7 +16,6 @@ ATank::ATank()
 
 	//Setting aiming component
 	AimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
-	MovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));
 }
 
 // Called when the game starts or when spawned
@@ -36,7 +35,7 @@ void ATank::AimAt(FVector AimLocation){
 	AimingComponent->AimAt(AimLocation,LaunchSpeed);
 }
 
-void ATank::SetTankReferences(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet, UTankTrack* LeftTrack, UTankTrack* RightTrack){
+void ATank::SetupTank(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet, UTankTrack* LeftTrack, UTankTrack* RightTrack){
 	//Barrel
 	AimingComponent->SetBarrelReference(BarrelToSet);
 	BarrelRef = BarrelToSet;
