@@ -24,6 +24,8 @@ public:
 	void IntendMoveForward(float Throw);
 	UFUNCTION(BlueprintCallable)
 	void IntendTurnRight(float Throw);
+	UFUNCTION()
+	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 
 private:
 	UPROPERTY()

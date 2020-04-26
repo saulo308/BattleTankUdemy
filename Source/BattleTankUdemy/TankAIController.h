@@ -24,8 +24,11 @@ private:
 	UFUNCTION()
 	ATank* GetPlayerControlledTank() const;
 
+private:
 	UPROPERTY()
 	ATank* PlayerTank = nullptr;
 	UPROPERTY()
 	ATank* ControlledTank = nullptr;
+	UPROPERTY()
+	float AcceptanceRadius = 3000.f;
 };
