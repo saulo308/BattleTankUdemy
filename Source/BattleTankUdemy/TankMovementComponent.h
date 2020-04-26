@@ -22,6 +22,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void IntendMoveForward(float Throw);
+	UFUNCTION(BlueprintCallable)
+	void IntendTurnRight(float Throw);
 
 private:
 	UPROPERTY()
