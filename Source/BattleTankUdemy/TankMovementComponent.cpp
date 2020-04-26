@@ -15,7 +15,17 @@ void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* 
 }
 
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed){
-    UE_LOG(LogTemp,Warning,TEXT("%s is moving at %s"),*GetOwner()->GetName(),*MoveVelocity.ToString());
+    //No need to call super, we're going to replace the way AI moves with MoveActor() function
+   
+    //Caculating the "paralelness" of tank forward vector and the vector where the AI wants to go
+    auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
+    auto AIForwardIntention = MoveVelocity.GetSafeNormal();
+    //We're using a dot product to calculate how "right" the forward vector is of where the AI wants to go
+    //(1 = TankForward = AIForwardIntention; -1 = TankForward = -AIForwardIntention; 0 if TankForward and AIForwardIntention are perpendicular)
+    auto ForwardThrow = FVector::DotProduct(TankForward,AIForwardIntention);
+
+    //Calling Move forward
+    IntendMoveForward(ForwardThrow);
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw){
