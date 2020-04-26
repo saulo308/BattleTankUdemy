@@ -2,6 +2,7 @@
 
 #include "Tank.h"
 #include "TankAimingComponent.h"
+#include "TankMovementComponent.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
 #include "TankTurret.h"
@@ -15,6 +16,7 @@ ATank::ATank()
 
 	//Setting aiming component
 	AimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+	MovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));
 }
 
 // Called when the game starts or when spawned
@@ -28,10 +30,6 @@ void ATank::BeginPlay()
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-	if(PlayerInputComponent){
-		PlayerInputComponent->BindAction("Fire",EInputEvent::IE_Pressed,this,&ATank::Fire);
-	}
 }
 
 void ATank::AimAt(FVector AimLocation){

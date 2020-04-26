@@ -11,6 +11,7 @@ class UTankBarrel;
 class UTankTurret;
 class UTankTrack;
 class UTankAimingComponent;
+class UTankMovementComponent;
 class AProjectile;
 
 UCLASS()
@@ -26,9 +27,6 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	
-	UPROPERTY()
-	UTankAimingComponent* AimingComponent = nullptr;
 
 public:	
 	// Called to bind functionality to input
@@ -49,6 +47,11 @@ public:
 	UStaticMesh* TurretMesh;
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	UStaticMesh* TrackMesh;
+
+protected:
+	UTankAimingComponent* AimingComponent = nullptr;
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* MovementComponent = nullptr;
 
 private:
 	//Fire properties
