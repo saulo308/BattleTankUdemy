@@ -49,6 +49,7 @@ public:
 	UStaticMesh* TrackMesh;
 
 protected:
+	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* AimingComponent = nullptr;
 	UPROPERTY(BlueprintReadOnly)
 	UTankMovementComponent* MovementComponent = nullptr;

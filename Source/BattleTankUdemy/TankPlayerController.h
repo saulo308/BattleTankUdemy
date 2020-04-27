@@ -20,8 +20,9 @@ class BATTLETANKUDEMY_API ATankPlayerController : public APlayerController
 	virtual void Tick(float DeltaTime) override;
 
 public:
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	ATank* GetControlledTank() const;
+
 private:
 	UFUNCTION()
 	void AimTowardsCrosshair();
@@ -32,6 +33,7 @@ private:
 	UFUNCTION()
 	bool GetLookVectorHitLocation(FVector LookDirection,FVector& HitLocation) const;
 
+private:
 	UPROPERTY()
 	ATank* PlayerTank = nullptr;
 	UPROPERTY(EditDefaultsOnly)
