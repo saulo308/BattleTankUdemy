@@ -19,6 +19,8 @@ void ATankAIController::BeginPlay(){
 void ATankAIController::Tick(float DeltaTime){
     Super::Tick(DeltaTime);
 
+    if(!ensure(ControlledTank && PlayerTank)) return;
+
     if(ControlledTank && PlayerTank){
         //Move towards player
         MoveToActor(PlayerTank,AcceptanceRadius);
@@ -33,7 +35,7 @@ void ATankAIController::Tick(float DeltaTime){
 
 ATank* ATankAIController::GetPlayerControlledTank() const{
     auto PlayerController = GetWorld()->GetFirstPlayerController();
-    if(!PlayerController)
+    if(!ensure(PlayerController))
         return nullptr;
 
     return Cast<ATankPlayerController>(PlayerController)->GetControlledTank();

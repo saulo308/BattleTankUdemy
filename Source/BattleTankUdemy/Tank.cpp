@@ -22,7 +22,7 @@ void ATank::BeginPlay()
 }
 
 void ATank::AimAt(FVector AimLocation){
-	if(!AimingComponent) return;
+	if(!ensure(AimingComponent)) return;
 
 	AimingComponent->AimAt(AimLocation,LaunchSpeed);
 }
@@ -44,9 +44,11 @@ void ATank::SetupTankMeshes(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet, U
 }
 
 void ATank::Fire(){
+	if(!ensure(BarrelRef)) return;
+
 	bool bIsReloaded = (FPlatformTime::Seconds() - LastFireTime) >= ReloadTimeInSeconds;
 
-	if(BarrelRef && bIsReloaded){
+	if(bIsReloaded){
 		//Spawning
 		auto SpawnLocation = BarrelRef->GetSocketLocation(FName("BarrelMuzzle"));
 		auto SpawnRotation = BarrelRef->GetSocketRotation(FName("BarelMuzzle"));

@@ -5,7 +5,7 @@
 #include "TankTrack.h"
 
 void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet){
-    if(!LeftTrackToSet || !RightTrackToSet){
+    if(!ensure(LeftTrackToSet && RightTrackToSet)){
         UE_LOG(LogTemp,Error,TEXT("Can't initialise TankMovement, Tracks are null!!!"));
         return;
     }
@@ -37,13 +37,13 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw){
-    if(!LeftTrack || !RightTrack) return; 
+    if(!ensure(LeftTrack && RightTrack)) return; 
     LeftTrack->SetThrottle(Throw);
     RightTrack->SetThrottle(Throw);    
 }
 
 void UTankMovementComponent::IntendTurnRight(float Throw){
-    if(!LeftTrack || !RightTrack) return;
+    if(!ensure(LeftTrack && RightTrack)) return;
 
     LeftTrack->SetThrottle(Throw);
     RightTrack->SetThrottle(-Throw);    
