@@ -1,20 +1,17 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankPlayerController.h"
-#include "Tank.h"
 #include "Engine/World.h"
 #include "TankAimingComponent.h"
 
 void ATankPlayerController::BeginPlay(){
     Super::BeginPlay();
 
-    PlayerTank = GetControlledTank();
-    if(!PlayerTank)
-        UE_LOG(LogTemp,Warning,TEXT("PlayerController not possesing a tank!! PlayerTank not defined"));
-
-    auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+    //Getting AimingComponent from Pawn(Tank)
+    auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
     if(!ensure(AimingComponent)) return;
 
+    //Setting widget(Crosshair)
     FoundAimingComponent(AimingComponent);
 }
 
@@ -25,17 +22,15 @@ void ATankPlayerController::Tick(float DeltaTime){
     AimTowardsCrosshair();
 }
 
-ATank* ATankPlayerController::GetControlledTank() const{
-    return Cast<ATank>(GetPawn());
-}
-
 void ATankPlayerController::AimTowardsCrosshair(){
-    if(!ensure(PlayerTank)) return; 
+    //Getting AimingComponent from Pawn(Tank)
+    auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+    if(!ensure(AimingComponent)) return;
 
-    //CallingRayCast
+    //CallingRayCast and retrieving HitLocationResult
     FVector HitLocationResult = FVector(0);
     if(GetSightRayHitLocation(HitLocationResult)){
-        PlayerTank->AimAt(HitLocationResult);
+        AimingComponent->AimAt(HitLocationResult);
     }
 }
 
@@ -70,7 +65,7 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection,FVect
     FHitResult OutHit;
     FVector Start = PlayerCameraManager->GetCameraLocation();
     FVector End = Start + LookDirection * LineTraceRange;
-    FCollisionQueryParams QueryParams(TEXT(""),false,PlayerTank);
+    FCollisionQueryParams QueryParams(TEXT(""),false,GetPawn());
     bHit = GetWorld()->LineTraceSingleByChannel(
         OutHit,
         Start,

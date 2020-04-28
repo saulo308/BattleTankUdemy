@@ -10,7 +10,6 @@
 class UTankBarrel;
 class UTankTurret;
 class UTankTrack;
-class UTankAimingComponent;
 class AProjectile;
 
 UCLASS()
@@ -28,8 +27,6 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	UFUNCTION()
-	void AimAt(FVector AimLocation);
 	UFUNCTION(BlueprintCallable)
 	void Fire();
 	UFUNCTION(BlueprintCallable)
@@ -44,12 +41,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	UStaticMesh* TrackMesh;
 
-protected:
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* AimingComponent = nullptr;
-
 private:
 	//Fire properties
+	//TODO: REMOVE LAUNCH SPEED
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 	float LaunchSpeed = 4000.f;
 	UPROPERTY(EditDefaultsOnly, Category = Firing)

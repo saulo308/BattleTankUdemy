@@ -29,7 +29,7 @@ public:
 
 public:	
 	UFUNCTION()
-	void AimAt(FVector HitLocation,float LaunchSpeed);
+	void AimAt(FVector HitLocation);
 	UFUNCTION(BlueprintCallable)
 	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
@@ -40,6 +40,9 @@ private:
 protected:
 	UPROPERTY(BlueprintReadOnly)
 	EFiringState FiringState = EFiringState::Locked;	
+	//Fire properties
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float LaunchSpeed = 4000.f;
 
 private:
 	UPROPERTY()
