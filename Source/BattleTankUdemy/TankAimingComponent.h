@@ -30,15 +30,13 @@ public:
 public:	
 	UFUNCTION()
 	void AimAt(FVector HitLocation,float LaunchSpeed);
-	UFUNCTION()
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-	UFUNCTION()
-	void SetTurretReference(UTankTurret* TurretToSet);
+	UFUNCTION(BlueprintCallable)
+	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 private:
 	UFUNCTION()
 	void MoveBarrelTowards(FVector AimDirection);
-
+	
 protected:
 	UPROPERTY(BlueprintReadOnly)
 	EFiringState FiringState = EFiringState::Locked;	

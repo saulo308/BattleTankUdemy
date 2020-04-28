@@ -29,15 +29,12 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 	UFUNCTION()
 	void AimAt(FVector AimLocation);
 	UFUNCTION(BlueprintCallable)
 	void Fire();
 	UFUNCTION(BlueprintCallable)
-	void SetupTank(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet,UTankTrack* LeftTrack, UTankTrack* RightTrack);
+	void SetupTankMeshes(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet,UTankTrack* LeftTrack, UTankTrack* RightTrack);
 
 public:
 	//Static meshes to set
@@ -51,8 +48,6 @@ public:
 protected:
 	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* AimingComponent = nullptr;
-	UPROPERTY(BlueprintReadOnly)
-	UTankMovementComponent* MovementComponent = nullptr;
 
 private:
 	//Fire properties
@@ -62,11 +57,9 @@ private:
 	float ReloadTimeInSeconds = 3.f;
 	UPROPERTY()
 	double LastFireTime = 0;
+	UPROPERTY()
+	UTankBarrel* BarrelRef = nullptr;
 
 	UPROPERTY(EditDefaultsOnly,Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
-
-	//Barrel
-	UPROPERTY()
-	UTankBarrel* BarrelRef = nullptr;
 };
