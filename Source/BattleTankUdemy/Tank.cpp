@@ -2,7 +2,6 @@
 
 #include "Tank.h"
 #include "TankBarrel.h"
-#include "Projectile.h"
 #include "TankTurret.h"
 #include "TankTrack.h"
 
@@ -32,29 +31,6 @@ void ATank::SetupTankMeshes(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet, U
 	if(TrackMesh){
 		LeftTrack->SetStaticMesh(TrackMesh);
 		RightTrack->SetStaticMesh(TrackMesh);
-	}
-}
-
-void ATank::Fire(){
-	if(!ensure(BarrelRef)) return;
-
-	bool bIsReloaded = (FPlatformTime::Seconds() - LastFireTime) >= ReloadTimeInSeconds;
-
-	if(bIsReloaded){
-		//Spawning
-		auto SpawnLocation = BarrelRef->GetSocketLocation(FName("BarrelMuzzle"));
-		auto SpawnRotation = BarrelRef->GetSocketRotation(FName("BarelMuzzle"));
-		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
-			ProjectileBlueprint,
-			SpawnLocation,
-			SpawnRotation
-		);
-
-		//Launching
-		Projectile->LaunchProjectile(LaunchSpeed);
-
-		//Reset fire time
-		LastFireTime = FPlatformTime::Seconds();
 	}
 }
 

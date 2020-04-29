@@ -10,7 +10,6 @@
 class UTankBarrel;
 class UTankTurret;
 class UTankTrack;
-class AProjectile;
 
 UCLASS()
 class BATTLETANKUDEMY_API ATank : public APawn
@@ -28,8 +27,6 @@ protected:
 
 public:	
 	UFUNCTION(BlueprintCallable)
-	void Fire();
-	UFUNCTION(BlueprintCallable)
 	void SetupTankMeshes(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet,UTankTrack* LeftTrack, UTankTrack* RightTrack);
 
 public:
@@ -40,19 +37,4 @@ public:
 	UStaticMesh* TurretMesh;
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	UStaticMesh* TrackMesh;
-
-private:
-	//Fire properties
-	//TODO: REMOVE LAUNCH SPEED
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
-	float LaunchSpeed = 4000.f;
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
-	float ReloadTimeInSeconds = 3.f;
-	UPROPERTY()
-	double LastFireTime = 0;
-	UPROPERTY()
-	UTankBarrel* BarrelRef = nullptr;
-
-	UPROPERTY(EditDefaultsOnly,Category = Setup)
-	TSubclassOf<AProjectile> ProjectileBlueprint;
 };
