@@ -39,10 +39,12 @@ public:
 	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 	UFUNCTION(BlueprintCallable)
 	void Fire();
+	UFUNCTION()
+	bool IsBarrelMoving();
 
 private:
 	UFUNCTION()
-	void MoveBarrelTowards(FVector AimDirection);
+	void MoveBarrelTowards();
 	
 protected:
 	UPROPERTY(BlueprintReadOnly)
@@ -64,4 +66,5 @@ private:
 	UTankBarrel* BarrelRef = nullptr;
 	UPROPERTY()
 	UTankTurret* TurretRef = nullptr;
+	FVector AimDirection;
 };
