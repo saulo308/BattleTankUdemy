@@ -5,7 +5,7 @@
 #include "Math/UnrealMathUtility.h"
 
 UTankTrack::UTankTrack(){
-    PrimaryComponentTick.bCanEverTick = true;
+    PrimaryComponentTick.bCanEverTick = false;
 }
 
 void UTankTrack::BeginPlay(){
@@ -13,13 +13,16 @@ void UTankTrack::BeginPlay(){
     OnComponentHit.AddDynamic(this, &UTankTrack::OnHit);
 }
 
-void UTankTrack::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction){
-    Super::TickComponent(DeltaTime,TickType,ThisTickFunction);
-
-    CorrectTrackMovement(DeltaTime);
+void UTankTrack::OnHit(UPrimitiveComponent* HitComponent,AActor* OtherActor,UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit){
+    //DriveTrack (Apply forces)
+    DriveTrack();
+    //Apply sideways force
+    ApplySidewaysForce();
+    //Reset Throttle
+    CurrentThrottle = 0;
 }
 
-void UTankTrack::CorrectTrackMovement(float DeltaTime){
+void UTankTrack::ApplySidewaysForce(){
     //==Correcting the accelaration (i.e. prevent tank from slipping)==
 
     //Calculating slippage speed
@@ -28,6 +31,7 @@ void UTankTrack::CorrectTrackMovement(float DeltaTime){
     //Calculating accelaration and then acceletarion direction(* -1 because we want it to be opossite to the movement)
     //* RightVector() because we want the direction
     //(Acceletarion = Speed / time)
+    auto DeltaTime = GetWorld()->GetDeltaSeconds();
     auto AccelerationCorrection = - ((SplippageSpeed / DeltaTime) * GetRightVector()); 
 
     //Calculating force (F = m.a)
@@ -39,20 +43,15 @@ void UTankTrack::CorrectTrackMovement(float DeltaTime){
 }
 
 void UTankTrack::SetThrottle(float Throttle){
-    //UE_LOG(LogTemp,Warning,TEXT("%s throttle is %f"),*GetName(),Throttle);
+    CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle,-1,1);
+}
 
-    //Clamping throttle
-    Throttle = FMath::Clamp<float>(Throttle,-1.f,1.f);
-
+void UTankTrack::DriveTrack(){
     //Calculation force speed and location
     auto ForceLocation = GetComponentLocation();
-    auto ForceApplied = GetForwardVector() * Throttle * TrackMaxDrivingForce;
+    auto ForceApplied = GetForwardVector() * CurrentThrottle * TrackMaxDrivingForce;
     auto TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
 
     //Apply force
     TankRoot->AddForceAtLocation(ForceApplied,ForceLocation);
-}
-
-void UTankTrack::OnHit(UPrimitiveComponent* HitComponent,AActor* OtherActor,UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit){
-    UE_LOG(LogTemp,Warning,TEXT("Hit ground"));
 }
