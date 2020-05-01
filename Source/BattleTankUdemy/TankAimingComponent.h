@@ -12,7 +12,8 @@ enum class EFiringState : uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	OutOfAmmo
 };
 
 class UTankBarrel;
@@ -42,7 +43,9 @@ public:
 	UFUNCTION()
 	bool IsBarrelMoving();
 	UFUNCTION()
-	EFiringState GetFiringState();
+	EFiringState GetFiringState() const;
+	UFUNCTION(BlueprintCallable)
+	int32 GetCurrentAmmo() const;
 
 private:
 	UFUNCTION()
@@ -69,4 +72,7 @@ private:
 	UPROPERTY()
 	UTankTurret* TurretRef = nullptr;
 	FVector AimDirection;
+	//Ammo
+	UPROPERTY()
+	int32 CurrentAmmo = 3;
 };

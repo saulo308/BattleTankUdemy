@@ -25,12 +25,18 @@ void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* Tur
 	TurretRef = TurretToSet;
 }
 
-EFiringState UTankAimingComponent::GetFiringState(){
+EFiringState UTankAimingComponent::GetFiringState() const{
 	return FiringState;
 }
 
+int32 UTankAimingComponent::GetCurrentAmmo() const{
+	return CurrentAmmo;
+}
+
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction){
-	if((FPlatformTime::Seconds() - LastFireTime) <= ReloadTimeInSeconds){
+	if(GetCurrentAmmo() <= 0){
+		FiringState = EFiringState::OutOfAmmo;
+	}else if((FPlatformTime::Seconds() - LastFireTime) <= ReloadTimeInSeconds){
 		FiringState = EFiringState::Reloading;
 	}else if(IsBarrelMoving()){
 		FiringState = EFiringState::Aiming;
@@ -84,7 +90,7 @@ void UTankAimingComponent::MoveBarrelTowards(){
 }
 
 void UTankAimingComponent::Fire(){
-	if(FiringState != EFiringState::Reloading){
+	if(GetCurrentAmmo() > 0 && FiringState != EFiringState::Reloading){
 		//Spawning
 		auto SpawnLocation = BarrelRef->GetSocketLocation(FName("BarrelMuzzle"));
 		auto SpawnRotation = BarrelRef->GetSocketRotation(FName("BarelMuzzle"));
@@ -101,6 +107,9 @@ void UTankAimingComponent::Fire(){
 
 		//Reset fire time
 		LastFireTime = FPlatformTime::Seconds();
+
+		//Ammo
+		CurrentAmmo--;
 	}
 }
 
