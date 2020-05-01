@@ -25,6 +25,10 @@ void UTankAimingComponent::Initialise(UTankBarrel* BarrelToSet, UTankTurret* Tur
 	TurretRef = TurretToSet;
 }
 
+EFiringState UTankAimingComponent::GetFiringState(){
+	return FiringState;
+}
+
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction){
 	if((FPlatformTime::Seconds() - LastFireTime) <= ReloadTimeInSeconds){
 		FiringState = EFiringState::Reloading;

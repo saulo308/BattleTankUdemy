@@ -41,6 +41,8 @@ public:
 	void Fire();
 	UFUNCTION()
 	bool IsBarrelMoving();
+	UFUNCTION()
+	EFiringState GetFiringState();
 
 private:
 	UFUNCTION()
