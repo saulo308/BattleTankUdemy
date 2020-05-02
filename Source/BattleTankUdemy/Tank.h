@@ -28,6 +28,8 @@ protected:
 public:	
 	UFUNCTION(BlueprintCallable)
 	void SetupTankMeshes(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet,UTankTrack* LeftTrack, UTankTrack* RightTrack);
+	UFUNCTION()
+	virtual float TakeDamage(float DamageAmount,struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override;
 
 public:
 	//Static meshes to set
@@ -37,4 +39,9 @@ public:
 	UStaticMesh* TurretMesh;
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	UStaticMesh* TrackMesh;
+private:
+	UPROPERTY(EditDefaultsOnly, Category = "Health")
+	int32 StartingHealth = 100.f;
+	UPROPERTY(VisibleAnywhere, Category = "Health")
+	int32 CurrentHealth = StartingHealth;
 };

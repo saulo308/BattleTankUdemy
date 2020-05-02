@@ -34,3 +34,15 @@ void ATank::SetupTankMeshes(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet, U
 	}
 }
 
+float ATank::TakeDamage(float DamageAmount,struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser){
+	int32 DamagePoints = FPlatformMath::RoundToInt(DamageAmount);
+	int32 DamageToApply = FMath::Clamp(DamagePoints,0,CurrentHealth);
+
+	UE_LOG(LogTemp,Warning,TEXT("DamageAmmount: %f - DamageToApply:%d"),DamageAmount,DamageToApply);
+	CurrentHealth -= DamageToApply;
+	if(CurrentHealth <= 0)
+		UE_LOG(LogTemp,Warning,TEXT("Tank died"));
+
+	return DamageToApply;
+}
+

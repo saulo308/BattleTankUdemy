@@ -2,6 +2,7 @@
 
 
 #include "Projectile.h"
+#include "Kismet/GameplayStatics.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
 // Sets default values
@@ -18,7 +19,7 @@ AProjectile::AProjectile()
 	CollisionMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Collision Mesh"));
 	SetRootComponent(CollisionMesh);
 	CollisionMesh->SetNotifyRigidBodyCollision(true);
-	//CollisionMesh->SetVisibility(false);
+	CollisionMesh->SetVisibility(false);
 
 	//ParticleSystem
 	//Launch
@@ -58,6 +59,16 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
 	//Destroying collision mesh
 	SetRootComponent(ImpactBlast);
 	CollisionMesh->DestroyComponent();
+
+	//Applying damage
+	UGameplayStatics::ApplyRadialDamage(
+		this,
+		ProjectileDamage,
+		GetActorLocation(),
+		ExplosionForce->Radius,
+		UDamageType::StaticClass(),
+		TArray<AActor*>()
+	);
 
 	//Delay to destroy projectile
 	FTimerHandle TimerHandle;
