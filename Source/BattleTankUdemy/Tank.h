@@ -30,6 +30,8 @@ public:
 	void SetupTankMeshes(UTankBarrel* BarrelToSet,UTankTurret* TurretToSet,UTankTrack* LeftTrack, UTankTrack* RightTrack);
 	UFUNCTION()
 	virtual float TakeDamage(float DamageAmount,struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override;
+	UFUNCTION(BlueprintPure)
+	float GetHealthPercentage();
 
 public:
 	//Static meshes to set
