@@ -73,6 +73,6 @@ private:
 	UTankTurret* TurretRef = nullptr;
 	FVector AimDirection;
 	//Ammo
-	UPROPERTY()
-	int32 CurrentAmmo = 3;
+	UPROPERTY(EditDefaultsOnly,Category = "Firing")
+	int32 CurrentAmmo = 20;
 };
