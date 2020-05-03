@@ -11,6 +11,8 @@ class UTankBarrel;
 class UTankTurret;
 class UTankTrack;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTankDeathDelegate);
+
 UCLASS()
 class BATTLETANKUDEMY_API ATank : public APawn
 {
@@ -32,6 +34,7 @@ public:
 	virtual float TakeDamage(float DamageAmount,struct FDamageEvent const& DamageEvent, class AController* EventInstigator, class AActor* DamageCauser) override;
 	UFUNCTION(BlueprintPure)
 	float GetHealthPercentage();
+	FTankDeathDelegate OnTankDeath;
 
 public:
 	//Static meshes to set
@@ -43,7 +46,7 @@ public:
 	UStaticMesh* TrackMesh;
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Health")
-	int32 StartingHealth = 100.f;
+	int32 StartingHealth = 20.f;
 	UPROPERTY(VisibleAnywhere, Category = "Health")
 	int32 CurrentHealth = StartingHealth;
 };

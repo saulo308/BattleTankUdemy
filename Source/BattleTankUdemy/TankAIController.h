@@ -17,6 +17,10 @@ class BATTLETANKUDEMY_API ATankAIController : public AAIController
 public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
+	virtual void SetPawn(APawn* InPawn) override;
+private:
+	UFUNCTION()
+	void OnReceiveTankDeath();
 
 private:
 	UPROPERTY(EditDefaultsOnly,Category = "Setup")
