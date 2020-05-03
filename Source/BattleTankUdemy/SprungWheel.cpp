@@ -10,14 +10,15 @@ ASprungWheel::ASprungWheel()
 	PrimaryActorTick.bCanEverTick = true;
 
 	//Setting components
+	Spring = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("Spring"));
+	SetRootComponent(Spring);
+
 	Mass = CreateDefaultSubobject<UStaticMeshComponent>(FName("Mass"));
-	SetRootComponent(Mass);
+	Mass->SetupAttachment(Spring);
 
 	Wheel = CreateDefaultSubobject<UStaticMeshComponent>(FName("Wheel"));
-	Wheel->SetupAttachment(Mass);
+	Wheel->SetupAttachment(Spring);
 
-	Spring = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("Spring"));
-	Spring->SetupAttachment(Mass);
 }
 
 // Called when the game starts or when spawned
