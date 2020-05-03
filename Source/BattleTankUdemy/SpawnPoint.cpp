@@ -3,6 +3,7 @@
 
 #include "SpawnPoint.h"
 #include "SprungWheel.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
 USpawnPoint::USpawnPoint()
@@ -20,10 +21,14 @@ void USpawnPoint::BeginPlay()
 {
 	Super::BeginPlay();
 
-	auto Actor = GetWorld()->SpawnActor<ASprungWheel>(SprungWheelBP);
-	if(!Actor) return;
-
-	Actor->AttachToComponent(this,FAttachmentTransformRules::KeepRelativeTransform);
+	auto Actor = GetWorld()->SpawnActorDeferred<ASprungWheel>(
+			SprungWheelBP,
+			GetComponentTransform()
+		);
+	if(Actor){
+		Actor->AttachToComponent(this,FAttachmentTransformRules::KeepWorldTransform);
+		UGameplayStatics::FinishSpawningActor(Actor, GetComponentTransform());
+	}
 }
 
 
