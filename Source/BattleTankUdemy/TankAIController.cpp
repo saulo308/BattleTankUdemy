@@ -28,7 +28,10 @@ void ATankAIController::Tick(float DeltaTime){
     auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
     auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 
-    if(!ensure(ControlledTank && PlayerTank && AimingComponent)) return;
+    if(!ensure(AimingComponent)) return;
+
+    if(!PlayerTank) return;
+    if(!ControlledTank) return;
 
     //Move towards player
     MoveToActor(PlayerTank,AcceptanceRadius);
@@ -42,6 +45,8 @@ void ATankAIController::Tick(float DeltaTime){
 }
 
 void ATankAIController::OnReceiveTankDeath(){
-    UE_LOG(LogTemp,Warning,TEXT("Ai dead"));
+    if(!GetPawn()) return;
+
+    GetPawn()->DetachFromControllerPendingDestroy();
 }
 

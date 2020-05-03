@@ -93,5 +93,5 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection,FVect
 }
 
 void ATankPlayerController::OnReceiveTankDeath(){
-    UE_LOG(LogTemp,Warning,TEXT("tank dead"));
+    StartSpectatingOnly();
 }

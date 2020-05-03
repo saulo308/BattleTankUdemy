@@ -46,7 +46,7 @@ public:
 	UStaticMesh* TrackMesh;
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Health")
-	int32 StartingHealth = 20.f;
+	int32 StartingHealth = 100.f;
 	UPROPERTY(VisibleAnywhere, Category = "Health")
 	int32 CurrentHealth = StartingHealth;
 };

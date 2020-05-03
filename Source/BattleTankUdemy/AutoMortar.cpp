@@ -15,20 +15,23 @@ AAutoMortar::AAutoMortar()
 void AAutoMortar::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	CurrentHealth = StartingHealth;
 }
 
-// Called every frame
-void AAutoMortar::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
+float AAutoMortar::GetHealthPercentage(){
+	return (float)CurrentHealth / (float)StartingHealth;
 }
 
-// Called to bind functionality to input
-void AAutoMortar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
+float AAutoMortar::TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController * EventInstigator, AActor * DamageCauser){
+	int32 DamagePoints = FPlatformMath::RoundToInt(DamageAmount);
+	int32 DamageToApply = FMath::Clamp(DamagePoints, 0, CurrentHealth);
 
+	CurrentHealth -= DamageToApply;
+	if(CurrentHealth <= 0){
+		UE_LOG(LogTemp,Warning,TEXT("PEace out"));
+		Destroy();
+	}
+
+	return DamageToApply;
 }
 
