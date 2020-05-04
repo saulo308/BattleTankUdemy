@@ -21,14 +21,18 @@ void USpawnPoint::BeginPlay()
 {
 	Super::BeginPlay();
 
-	auto Actor = GetWorld()->SpawnActorDeferred<ASprungWheel>(
-			SprungWheelBP,
-			GetComponentTransform()
-		);
-	if(Actor){
-		Actor->AttachToComponent(this,FAttachmentTransformRules::KeepWorldTransform);
-		UGameplayStatics::FinishSpawningActor(Actor, GetComponentTransform());
+	Wheel = GetWorld()->SpawnActorDeferred<ASprungWheel>(
+				SprungWheelBP,
+				GetComponentTransform()
+			);
+	if(Wheel){
+		Wheel->AttachToComponent(this,FAttachmentTransformRules::KeepWorldTransform);
+		UGameplayStatics::FinishSpawningActor(Wheel, GetComponentTransform());
 	}
+}
+
+ASprungWheel* USpawnPoint::GetWheel() const{
+	return Wheel;
 }
 
 

@@ -8,6 +8,8 @@
 void ATankPlayerController::BeginPlay(){
     Super::BeginPlay();
 
+    if(!GetPawn()) return;
+
     //Getting AimingComponent from Pawn(Tank)
     auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
     if(!ensure(AimingComponent)) return;

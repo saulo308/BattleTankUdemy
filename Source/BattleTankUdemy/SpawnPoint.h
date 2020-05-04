@@ -17,14 +17,19 @@ public:
 	// Sets default values for this component's properties
 	USpawnPoint();
 
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	UFUNCTION()
+	ASprungWheel* GetWheel() const;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	TSubclassOf<ASprungWheel> SprungWheelBP;		
+	TSubclassOf<ASprungWheel> SprungWheelBP;
+	UPROPERTY()
+	ASprungWheel* Wheel = nullptr;		
 };
