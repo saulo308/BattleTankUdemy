@@ -13,9 +13,14 @@ ASprungWheel::ASprungWheel()
 	Spring = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("Spring"));
 	SetRootComponent(Spring);
 
-	Wheel = CreateDefaultSubobject<UStaticMeshComponent>(FName("Wheel"));
-	Wheel->SetupAttachment(Spring);
+	Axle = CreateDefaultSubobject<USphereComponent>(FName("Axle"));
+	Axle->SetupAttachment(Spring);
 
+	AxleConstraint = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("Axle Constraint"));
+	AxleConstraint->SetupAttachment(Axle);
+
+	Wheel = CreateDefaultSubobject<USphereComponent>(FName("Wheel"));
+	Wheel->SetupAttachment(Axle);
 }
 
 // Called when the game starts or when spawned
@@ -34,6 +39,14 @@ void ASprungWheel::SetPhysicsConstrains(){
 	Spring->SetConstrainedComponents
 	(
 		TankBody,
+		NAME_None,
+		Axle,
+		NAME_None
+	);
+
+	AxleConstraint->SetConstrainedComponents
+	(
+		Axle,
 		NAME_None,
 		Wheel,
 		NAME_None
